@@ -1,6 +1,7 @@
 package m.operators;
 
 import m.matrices.Matrix;
+import m.exceptions.*;
 
 public abstract class UnaryOperator extends Matrix {
 
@@ -8,6 +9,6 @@ public abstract class UnaryOperator extends Matrix {
 		super();
 	}
 
-	public abstract Matrix calc(Matrix m);
+	public abstract Matrix calc(Matrix m) throws NegativeNumberFoundException;
 
 }

@@ -12,8 +12,6 @@ public class CSVLoader extends MatrixLoader {
 		setFile(file);
 		BufferedReader reader = null;
 		String line = null;
-		
-		System.out.println("el path es: " +getFullPath());
 
 		try {
 			reader = new BufferedReader(new FileReader(getFullPath()));
@@ -32,16 +30,12 @@ public class CSVLoader extends MatrixLoader {
 				r++;
 				if(r >= m.getRow()) r = 0;
 			}
-		} catch (Exception e) {
+			
+			reader.close();
+			
+		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
-		
-		
-		
 	}
-
-
-
-
+	
 }

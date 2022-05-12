@@ -1,32 +1,36 @@
 package m.matrices;
 
 import m.files.*;
+import m.exceptions.*;
+import m.operators.*;
 
-public class Matrix{
-
+public class Matrix {
+	
+	public Matrix() {
+		
+	}
+	
 	private int row;
 	private int column;
-	protected double[][] arrayM;
+	private double[][] arrayM;
 	private boolean isSquare;
 
-	public Matrix(){
-	}
-	// Hacer excepción para no pasar tamaños menores a 1 e implementarlo en los constructores
-	public Matrix(int row) {
+	public Matrix(int row) throws NegativeNumberFoundException  {
+		if(row<0)
+			throw new NegativeNumberFoundException(row);
 		isSquare = true;
 		this.arrayM = new double [row][row];
 		this.row = row;
 		this.column = row;
-		addZeros();
+		
 	}
 	
-	// Posible constructor con enums, idk
-//	public Matrix(int row, MType enum) {
-//		
-//	}
 	
-	
-	public Matrix(int row, int column) {
+	public Matrix(int row, int column) throws NegativeNumberFoundException {
+		if(row<0)
+			throw new NegativeNumberFoundException(row);
+		if(column<0)
+			throw new NegativeNumberFoundException(column);
 		this.arrayM = new double [row][column];
 		if(row == column) isSquare = true;
 		this.row = row;
@@ -35,13 +39,13 @@ public class Matrix{
 		
 	}
 
-	// Excepción por si rebasa los bounds de la matriz
-	public void setValue(int row, int column,double value) {
+
+	public void setValue(int row, int column,double value)   {
 		this.arrayM[row][column]= value;
 		
 	}
 
-	// Excepción por si rebasa los bounds de la matriz
+	
 	public double getValue(int row, int column) {
 		return arrayM[row][column];
 	}
@@ -122,24 +126,65 @@ public class Matrix{
 		return this.column;
 	}
 	
+	public boolean getIsSquare() {
+		return this.isSquare;
+	}
+	
+	public double[][] getArrayM(){
+		return this.arrayM;
+	}
+	
 	public void addColumn() {
-		
+
 	}
 	
-	public void addRow() {
+	private void setColumn(int column) {
+		this.column = column;
+	}
+	
+		public void addRow() throws NegativeNumberFoundException {
 		
+		Matrix temp = new Matrix(getRow()+1,getColumn());
+		for(int i =0;i<getRow();i++)
+			for(int j=0;j<getColumn();j++) {
+				temp.setValue(i, j, arrayM[i][j]);
+			}
+		
+			this.arrayM=temp.arrayM;
+			this.setRow(getRow()+1);
+			if(getRow()!=getColumn())
+				this.isSquare=false;
+			else 
+				this.isSquare=true;
 	}
 	
 	
+	private void setRow(int row) {
+		this.row = row;
+	}
+
 	public void deleteColumn() {
 		
 	}
 	
-	public void deleteRow() {
+	public void deleteRow() throws NegativeNumberFoundException {
+			
+		Matrix temp = new Matrix(getRow()-1,getColumn());
+		for(int i =0;i<getRow()-1;i++)
+			for(int j=0;j<getColumn();j++) {
+				temp.setValue(i, j, arrayM[i][j]);
+			}
 		
+			this.arrayM=temp.arrayM;
+			this.setRow(getRow()-1);
+			
+			if(getRow()!=getColumn())
+				this.isSquare=false;
+			else
+				this.isSquare=true;
 	}
 	
-	public void addZeros() {
+	public void addZeros()  {
 		for (int i = 0; i < getRow(); i++)
             for (int j = 0; j < getColumn(); j++) {
             	setValue(i, j, 0);
@@ -152,24 +197,21 @@ public class Matrix{
 
 		for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) 
-            	matrixStr += String.format("%10.3f ",getValue(i, j));
+            	matrixStr += String.format("%8.1f ",getValue(i, j));
             matrixStr += "\n";
 		}
 		return matrixStr;
 	}
 	
-	public Matrix clone() {
-		return new Matrix(1);
-	}
-	
-	public boolean equals(Object o) {
+	public boolean equalsSize(Matrix m) {
+		for(int i=0; i<this.arrayM.length;i++) {
+			if(this.arrayM.length!= m.arrayM.length ||
+				this.arrayM[i].length!= m.arrayM[i].length
+					) return false;
+		}
 		return true;
 	}
 	
-	/*
-	 * 	private CSVLoader loadedCSV;
-	 * private JSonLoader loadedJson;
-	 */
 	public void load(MatrixLoader loader, String file) {
 		if(loader instanceof CSVLoader) {
 			CSVLoader loadedCSV = new CSVLoader();
@@ -181,18 +223,11 @@ public class Matrix{
 		}
 	}
 	
-	
-	public static void main(String[] args) {
-		Matrix m1 = new Matrix(3);
-	
-      
-		System.out.println(m1);
-		System.out.println(m1.isIdentity());
-        System.out.println(m1.isNull());
-        System.out.println(m1.isSimmetric());
-        System.out.println(m1.isTriangularInf());
-        System.out.println(m1.isTriangularSup());
-	}
-	
+	public void save(MatrixSaver saver, String file) {
+		if(saver instanceof CSVSaver) {
+			CSVSaver savedCSV = new CSVSaver();
+			savedCSV.toSave(file, this);
+		}
 
+	}
 }

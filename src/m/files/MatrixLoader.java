@@ -1,6 +1,5 @@
 package m.files;
 
-
 public class MatrixLoader {
 
 	private static String fullPath;
@@ -28,13 +27,6 @@ public class MatrixLoader {
 		fullPath = null;
 		fullPath = this.directory + this.file;
 		return fullPath;
-	}
-	
-	public static void main(String[] args) {
-		MatrixLoader l = new MatrixLoader();
-		
-		l.setFile("f.csv");
-		System.out.println(l.getFullPath());
 	}
 	
 }

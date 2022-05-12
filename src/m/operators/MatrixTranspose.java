@@ -1,12 +1,13 @@
 package m.operators;
 
 import m.matrices.Matrix;
+import m.exceptions.*;
 
 public class MatrixTranspose extends UnaryOperator{
 	public MatrixTranspose() {
 	}
 	@Override
-	public Matrix calc(Matrix m) {
+	public Matrix calc(Matrix m) throws NegativeNumberFoundException {
 		
 		Matrix temp = new Matrix(m.getRow(), m.getColumn());
 	
