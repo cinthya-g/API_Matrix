@@ -1,6 +1,8 @@
 package m.files;
 
-public class MatrixLoader {
+import m.matrices.Matrix;
+
+public abstract class MatrixLoader {
 
 	private static String fullPath;
 	private String file;
@@ -28,5 +30,7 @@ public class MatrixLoader {
 		fullPath = this.directory + this.file;
 		return fullPath;
 	}
+	
+	public abstract void toLoad(String file, Matrix m);
 	
 }

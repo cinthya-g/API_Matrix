@@ -8,7 +8,6 @@ public class CSVLoader extends MatrixLoader {
 	public void toLoad(String file, Matrix m) {
 		
 		int c = 0, r = 0;
-		
 		setFile(file);
 		BufferedReader reader = null;
 		String line = null;

@@ -1,6 +1,8 @@
 package m.files;
 
-public class MatrixSaver {
+import m.matrices.Matrix;
+
+public abstract class MatrixSaver {
 
 	private static String fullPath;
 	private String file;
@@ -28,5 +30,7 @@ public class MatrixSaver {
 		fullPath = this.directory + this.file;
 		return fullPath;
 	}
+	
+	public abstract void toSave(String file, Matrix m);
 	
 }

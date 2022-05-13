@@ -7,7 +7,6 @@ import m.operators.*;
 public class Matrix {
 	
 	public Matrix() {
-		
 	}
 	
 	private int row;
@@ -25,7 +24,6 @@ public class Matrix {
 		
 	}
 	
-	
 	public Matrix(int row, int column) throws NegativeNumberFoundException {
 		if(row<0)
 			throw new NegativeNumberFoundException(row);
@@ -39,12 +37,9 @@ public class Matrix {
 		
 	}
 
-
 	public void setValue(int row, int column,double value)   {
 		this.arrayM[row][column]= value;
-		
 	}
-
 	
 	public double getValue(int row, int column) {
 		return arrayM[row][column];
@@ -62,7 +57,6 @@ public class Matrix {
 		return true;
 	}
 
-
 	public boolean isIdentity() {
 		 if(!isSquare)    
 	            return false;  
@@ -76,7 +70,6 @@ public class Matrix {
 	                }
 		 return true;         
 	}
-
 
 	public boolean isTriangularSup() {
 		if(!isSquare) 
@@ -116,13 +109,11 @@ public class Matrix {
 
 
 	public int getRow() {
-
 		return this.row;
 	}
 
 
 	public int getColumn() {
-
 		return this.column;
 	}
 	
@@ -197,7 +188,7 @@ public class Matrix {
 
 		for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) 
-            	matrixStr += String.format("%8.1f ",getValue(i, j));
+            	matrixStr += String.format("%8.3f ",getValue(i, j));
             matrixStr += "\n";
 		}
 		return matrixStr;
@@ -216,10 +207,10 @@ public class Matrix {
 		if(loader instanceof CSVLoader) {
 			CSVLoader loadedCSV = new CSVLoader();
 			loadedCSV.toLoad(file, this);
-			
 		}
 		else if(loader instanceof JSonLoader) {
-			System.out.println("Es json");
+			JSonLoader loadedJSon = new JSonLoader();
+			loadedJSon.toLoad(file, this);
 		}
 	}
 	
@@ -227,6 +218,10 @@ public class Matrix {
 		if(saver instanceof CSVSaver) {
 			CSVSaver savedCSV = new CSVSaver();
 			savedCSV.toSave(file, this);
+		}
+		else if(saver instanceof JSonSaver) {
+			JSonSaver savedJSon = new JSonSaver();
+			savedJSon.toSave(file, this);
 		}
 
 	}
