@@ -2,7 +2,13 @@ package m.files;
 
 import java.io.*;
 import m.matrices.*;
+import m.vectors.*;
 
+/**
+ * Guarda un archivo .csv separando los valores por comas.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class CSVSaver extends MatrixSaver {
 	
 	public void toSave(String file, Matrix m) {
@@ -23,6 +29,23 @@ public class CSVSaver extends MatrixSaver {
 			}
 			writer.close();	
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void toSave(String file, Vector v) {
+		setFile(file);
+		try {
+		
+			BufferedWriter writer = new BufferedWriter(new FileWriter(getFullPath()));
+			for(int i = 0; i < v.getN(); i++) {
+				String vStr = String.valueOf(v.getComponent(i));
+				writer.write(vStr+",");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}

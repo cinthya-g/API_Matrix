@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"m.exceptions"},{"l":"m.files"},{"l":"m.matrices"},{"l":"m.operators"},{"l":"m.tests"}];updateSearchResults();

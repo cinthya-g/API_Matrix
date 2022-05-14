@@ -1,13 +1,14 @@
 package m.tests;
 
-import m.exceptions.NegativeNumberFoundException;
+import m.exceptions.*;
 import m.files.*;
 import m.matrices.*;
 import m.operators.*;
+import m.vectors.*;
 
 public class TestMatrix {
 	
-	public static void main(String[] args) throws NegativeNumberFoundException {
+	public static void main(String[] args) throws NegativeNumberFoundException, InsufficientComponentsException {
 
 		// Test de Loader/Saver de CSV
 		Matrix m1 = new Matrix(3);
@@ -52,6 +53,44 @@ public class TestMatrix {
 		Matrix m5 = transpose.calc(m4);
 		System.out.println("m4 traspuesta");
 		System.out.println(m5);
+		
+		
+		Vector v = new Vector(10);
+		v.setComponent(1, 9);
+		v.setComponent(0, -7);
+		v.setComponent(5, 11);
+		System.out.println("v: "+v);
+		
+		Vector v2 = new Vector(10);
+		v2.setComponent(1, 9);
+		v2.setComponent(0, -7);
+		v2.setComponent(5, 11);
+		v2.setComponent(6, 11);
+		System.out.println("v2: "+v2);
+		System.out.println("equals: "+v.equals(v2));
+		
+		Vector v3 = new Vector(6);
+		v3.setComponent(0, -7);
+		v3.setComponent(1, -8);
+		v3.setComponent(2, -4);
+		v3.setComponent(3, 10);
+		v3.setComponent(4, 11.45);
+		v3.setComponent(5, 45.2);
+		System.out.println("v3: "+v3);
+		System.out.println("v3, |A|: "+v3.magnitude());
+		
+		
+		MatrixLoader loadv = new CSVLoader();
+		Vector v4 = new Vector(7);
+		v4.load(loadv, "vector.csv");
+		System.out.println("v4 con vector.csv: "+v4);
+		v4.setComponent(0, 666);
+		System.out.println("Ahora i[0] de v4 es 666: "+v4);
+		
+		MatrixSaver savev = new CSVSaver();
+		System.out.println("Guardando v4 en v4.csv:");
+		v4.save(savev, "v4.csv");
+		
 		
 	}
 

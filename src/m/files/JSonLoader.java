@@ -3,6 +3,11 @@ package m.files;
 import m.matrices.*;
 import java.io.*;
 
+/**
+ * Carga un archivo .json al convertir su contenido de JSONObject en un String.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class JSonLoader extends MatrixLoader {
 	
 	public void toLoad(String file, Matrix m) {

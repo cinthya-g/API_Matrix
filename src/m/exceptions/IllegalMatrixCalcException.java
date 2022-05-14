@@ -9,6 +9,7 @@ public class IllegalMatrixCalcException extends Exception {
 	}
 	
 	
+	@Override
 	public String toString() {
 		return String.format("%s\nMatrixCalc can't be performed, they have different sizes",getMessage());
 	}
