@@ -92,8 +92,81 @@ public class TestMatrix {
 		v4.save(savev, "v4.csv");
 		
 		
+		
+		Vector pdot1 = new Vector(4);
+		pdot1.setComponent(0, 4);
+		pdot1.setComponent(1, -6);
+		pdot1.setComponent(2, 8);
+		Vector pdot2 = new Vector(3);
+		pdot2.setComponent(0, 4.6);
+		System.out.println(pdot1); System.out.println(pdot2);
+		System.out.println(pdot2.getN());
+		double pdotR = 0;
+		try {
+			pdotR = pdot1.dot(pdot2);
+		} catch (IllegalVectorOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(pdotR);
+		
+		Vector sum1 = new Vector(3);
+		sum1.setComponent(0, 4);
+		sum1.setComponent(1, -6);
+		sum1.setComponent(2, 8);
+		Vector sum2 = sum1.clone();
+		sum2.setComponent(0, 4.6);
+		System.out.println(sum1); System.out.println(sum2);
+		//System.out.println(pdot2.getN());
+		
+		try {
+			Vector summed = sum1.sum(sum2);
+			System.out.println(summed);
+		} catch (IllegalVectorOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Vector c = new Vector(2);
+		c.setComponent(0, -150); c.setComponent(1, 70);
+		System.out.println("c: "+c);
+		Vector c2 = new Vector(2);
+		c2.setComponent(0,45); c2.setComponent(1, 90);
+		//c2.setComponent(2, -5);
+		System.out.println("c2: "+c2);
+		
+		// Aquí ocurre excepción a propósito ya que sólo hay cross de
+		// vectores de 3: < i, j, k>
+		try {
+			Vector crossR = c.cross(c2);
+			System.out.println(crossR);
+		} catch (IllegalVectorOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*
+		 * Probar 1 graph x ejecución ya que es static y crea una sola
+		 * instancia
+		 */
+		try {
+			Vector.graphScalarMultiplication(c, 1.5);
+		} catch (IllegalVectorOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		try {
+			Vector.graphParallelogramRule(c2,c);
+		} catch (IllegalVectorOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+
 	}
-
-
-	
 }
