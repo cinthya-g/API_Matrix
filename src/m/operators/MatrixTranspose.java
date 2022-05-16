@@ -3,9 +3,24 @@ package m.operators;
 import m.matrices.Matrix;
 import m.exceptions.*;
 
+/**
+ * Obtiene la matrix trapsuesta del objeto que se recibe.
+ * MatrixTranspose extiende a la clase UnaryOperator.
+ * Acción de seleccionar las filas de la matriz original 
+ * mediante el cambio de filas por columnas y las columnas por las filas
+ * en una nueva matriz.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class MatrixTranspose extends UnaryOperator{
+	
+	/**
+	 * Construye el objeto de dicho tipo.
+	 */
 	public MatrixTranspose() {
 	}
+	
+	
 	@Override
 	public Matrix calc(Matrix m) throws NegativeNumberFoundException {
 		

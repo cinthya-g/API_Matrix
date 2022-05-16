@@ -3,8 +3,19 @@ package m.operators;
 import m.exceptions.*;
 import m.matrices.*;
 
+/**
+ * Multiplicación de dos matrices de tamaño idéntico.
+ * Se calcula la multiplicación de ambas matrices si sus dimensiones son compatibles. 
+ * El número de columnas de en la Matriz1 es igual al número de filas de Matriz2
+ * sumando los elementos que ocupan la misma posición
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class MatrixMultiplication extends BinaryOperator{
 	
+	/**
+	 * Construye el objeto de dicho tipo.
+	 */
 	public MatrixMultiplication() {
 		
 	}

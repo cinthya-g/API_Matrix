@@ -8,16 +8,33 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
+/**
+ * Clase que crea el espacio dentro de la ventana en donde se representará
+ * el plano cartesiano. Dentro de su dibujado, también se incluirán los vectores
+ * a graficar que envíe el usuario. Sólo consta de líneas para simular la cuadrícula
+ * del plano de dos dimensiones (eje de las abscisas y eje de las ordenadas).
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class PanelDibujo extends JPanel {
 	
 	private Color operands = new Color(49, 28, 223); // azul oscuro
 	private Color result = new Color(12, 161, 64); //verde	
 	private Color parallelogram = new Color(179, 24, 246); // morado
 	
+	/**
+	 * Construye el objeto de dicho tipo.
+	 */
 	public PanelDibujo(){
 		
 	}
 	
+	/**
+	 * Muestra el plano cartesiano dibujado y las líneas (vectores) del usurio.
+	 * Asocia, también, el atributo de arrayOfVectors de Vector para imprimir
+	 * una de las cuatro operaciones disponibles en aquella clase.
+	 * @param g Objeto Graphics a manipular
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;

@@ -5,12 +5,24 @@ import java.awt.Graphics2D;
 import m.exceptions.*;
 import m.files.*;
 
+
+/**
+ * Clase que describe el funcionamiento de vectores a través de arreglos unidimensionales.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class Vector {
 
 	private int n = 2;	
 	private double[] arrayV;
 	private static Vector[] arrayOfVectors;
 	
+	/**
+	 * Crea un vector de n elementos.
+	 * @param n (Número de elementos en el vector)
+	 * @throws NegativeNumberFoundException  (Si la dimensión del vector no es positiva)
+	 * @throws InsufficientComponentsException (Si la dimensiín sigue siendo insuficiente)
+	 */
 	public Vector(int n) throws NegativeNumberFoundException, InsufficientComponentsException {
 		if(n < 0) 
 			throw new NegativeNumberFoundException(n);
@@ -24,25 +36,48 @@ public class Vector {
 		
 	}
 	
+	/**
+	 * Regresa la cantidad de elementos en un Vector
+	 * @return  (n, tamaño del vector)
+	 */
 	public int getN() {
 		return this.n;
 	}
 	
+	/**
+	 * Asignación de los valores reales del vector a partir de la posición brindada
+	 * @param n 
+	 * @param value
+	 */
 	public void setComponent(int n, double value) {
 		arrayV[n] = value;
 		
 	}
 	
+	/**
+	 * Regresa el componente de un Vector a partir de una posición brindada
+	 * @param n
+	 * @return
+	 */
 	public double getComponent(int n) {
 		return arrayV[n];
 	}
 	
+	/**
+	 * Asignación de ceros (0) 
+	 * a cada uno de los elementos del vector
+	 */
 	public void addZeros() {
 		for(int i = 0; i < this.n; i++) {
 			setComponent(i, 0);
 		}
 	}
 	
+	/**
+	 * Permite calcular la magnitud de un Vector (
+	 * Distancia entre el punto inicial y punto final)
+	 * @return Magnitud
+	 */
 	public double magnitude() {
 		double m = 0;
 		for(int i = 0; i < this.n; i++)
@@ -50,10 +85,19 @@ public class Vector {
 		return Math.sqrt(m);
 	}
 	
+	/**
+	 * Regresa el Vector en su implementación original
+	 * (Arreglo)
+	 * @return arrayOfVectors
+	 */
+	
 	public static Vector[] getArrayOfVectors() {
 		return Vector.arrayOfVectors;
 	}
 	
+	/**
+	 * Sobreescritura de método que regresa un String con formato de vector.
+	 */
 	@Override
 	public String toString() {
 		String vStr = "<";
@@ -66,6 +110,10 @@ public class Vector {
 		return vStr;
 	}
 	
+	/**
+	 * Sobreescritura de método que permite crear un vector con los mismos
+	 * atributos que el vector original (Clonación)
+	 */
 	@Override
 	public Vector clone() {
 		try {
@@ -79,6 +127,13 @@ public class Vector {
 		return null;
 	}
 	
+	/**
+	 * Sobreescritura de método que permite verificar si 2 Vectores son iguales 
+	 * a partir de la comparación de cada uno de sus atributos
+	 * @return <b>true</b> si se trata de 2 vectores iguales 
+	 * <b>false</b> en otro caso
+	 * 
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if(!(o instanceof Vector)) return false;
@@ -95,6 +150,13 @@ public class Vector {
 		return true;
 	}
 	
+	/**
+	 * Permite calcular el producto punto de 2 vectores
+	 * @param vd Vector (segundo vector)
+	 * @return Producto punto (pdot)
+	 * @throws IllegalVectorOperationException (En caso de que los elementos en el Vector
+	 * no sean los suficientes para realizar la operación)
+	 */
 	public double dot(Vector vd) throws IllegalVectorOperationException{
 		if(this.getN() != vd.getN()) {
 			throw new IllegalVectorOperationException();
@@ -106,6 +168,13 @@ public class Vector {
 		return pdot;
 	}
 	
+	/**
+	 * Permite calcular el producto cruz de 2 vectores siempre y cuando
+	 * cumplan con la cantidad de elementos establecida
+	 * @param vc Vector (segundo vector)
+	 * @return Producto cruz (Nuevo Vector)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en el vector es dieferente de 3  )
+	 */
 	public Vector cross(Vector vc) throws IllegalVectorOperationException{
 		if(this.getN() != 3 && vc.getN() != 3) {
 			throw new IllegalVectorOperationException();
@@ -119,6 +188,12 @@ public class Vector {
 		return cross;
 	}
 	
+	/**
+	 * Permite calcular la suma de 2 vectores 
+	 * @param vc Vector (Segundo vector)
+	 * @return Suma de vectores (Nuevo Vector)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+	 */
 	public Vector sum(Vector vc) throws IllegalVectorOperationException{
 		if(this.getN() != vc.getN()) {
 			throw new IllegalVectorOperationException();
@@ -131,6 +206,12 @@ public class Vector {
 		}
 	}
 
+	/**
+     * Permite calcular una resta entre 2 vectores
+     * @param vc Vector (Segundo vector)
+     * @return Resta de vectors (Nuevo Vector)
+     * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+     */
 	public Vector substraction(Vector vc) throws IllegalVectorOperationException{
 		if(this.getN() != vc.getN()) {
 			throw new IllegalVectorOperationException();
@@ -143,6 +224,11 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite cargar un Vector a partir de un formato .CSV
+	 * @param loader (Tipo del archivo)
+	 * @param file (Nombre del archivo)
+	 */
 	public void load(MatrixLoader loader, String file) {
 		if(loader instanceof CSVLoader) {
 			CSVLoader loadedCSV = new CSVLoader();
@@ -150,6 +236,11 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite guardar un Vector en formato .CSV
+	 * @param saver (Tipo del archivo)
+	 * @param file (Nombre del archivo)
+	 */
 	public void save(MatrixSaver saver, String file) {
 		if(saver instanceof CSVSaver) {
 			CSVSaver savedCSV = new CSVSaver();
@@ -157,6 +248,12 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite graficar la suma de 2 vectores
+	 * @param v1 (Vector 1)
+	 * @param v2 (Vector 2)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+	 */
 	public static void graphSum(Vector v1, Vector v2) throws IllegalVectorOperationException {
 		if(!(v1.getN() == 2 && v2.getN() == 2)) 
 			throw new IllegalVectorOperationException();
@@ -169,6 +266,12 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite graficar la resta de 2 vectores 
+	 * @param v1 (Vector 1)
+	 * @param v2 (Vector 2)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+	 */
 	public static void graphSubstraction(Vector v1, Vector v2) throws IllegalVectorOperationException {
 		if(!(v1.getN() == 2 && v2.getN() == 2)) 
 			throw new IllegalVectorOperationException();
@@ -181,6 +284,12 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite sumar dos vectores a partir de su representación gráfica
+	 * @param v1 (Vector 1)
+	 * @param v2 (Vector 2)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+	 */
 	public static void graphParallelogramRule(Vector v1, Vector v2) throws IllegalVectorOperationException {
 		if(!(v1.getN() == 2 && v2.getN() == 2)) 
 			throw new IllegalVectorOperationException();
@@ -201,6 +310,12 @@ public class Vector {
 		}
 	}
 	
+	/**
+	 * Permite realizar una multplicación escalar a un vector
+	 * @param v (Vector)
+	 * @param c (Constante para escalar)
+	 * @throws IllegalVectorOperationException (Si la cantidad de elementos en los vectores son distintas)
+	 */
 	public static void graphScalarMultiplication(Vector v, double c) throws IllegalVectorOperationException{
 		System.out.println("s");
 		if(v.getN() != 2) 
@@ -216,9 +331,6 @@ public class Vector {
 			arrayOfVectors[1] = scalar;
 			new Ventana();
 		}
-	
-	
 	}
-	
 
 }

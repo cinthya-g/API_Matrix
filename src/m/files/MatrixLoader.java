@@ -2,10 +2,15 @@ package m.files;
 
 import m.matrices.Matrix;
 
+
 /**
- * Establece una ruta predeterminada en donde se almacenarán los archivos
- * .csv y .json que se generen con su respectivo nombre (file); 
- *  se guardarán en la carpeta "savedfiles" dentro del proyecto.
+ * Clase que almacena la ruta relativa de cargado de archivos y permite su recuperación y modificación.
+ * <p>
+ * Establece una ruta predeterminada en donde se leerán los archivos
+ * <b>.csv</b> y <b>.json</b> que se soliciten por el usuario con su respectivo nombre (file); 
+ *  se leerán desde la carpeta <i>savedfiles</i> dentro del proyecto.
+ *  </p>
+ *  
  * @author Cinthya G, Iker J, Valeria R
  *
  */
@@ -15,6 +20,13 @@ public abstract class MatrixLoader {
 	private String file;
 	private String directory = "savedfiles\\";
 
+	/**
+	 * Cnostruye un objeto de dicho tipo.
+	 */
+	public MatrixLoader() {
+		
+	}
+	
 	/**
 	 * Especifica el nombre del archivo a leer.
 	 * @param file Nombre del archivo (tiene que terminar en .csv o .json).
@@ -33,7 +45,7 @@ public abstract class MatrixLoader {
 	
 	/**
 	 * Retorna el string con el nombre del archivo que se lee.
-	 * @return 
+	 * @return String con nombre del archivo.
 	 */
 	public String getFile() {
 		return this.file;
@@ -41,7 +53,7 @@ public abstract class MatrixLoader {
 	
 	/**
 	 * Retorna el string con el nombre de la ruta relativa de lectura.
-	 * @return
+	 * @return String con nombre del directorio (carpetas).
 	 */
 	public String getDirectory() {
 		return this.directory;
@@ -49,7 +61,7 @@ public abstract class MatrixLoader {
 	
 	/**
 	 * Retorna el string con la totalidad de la ruta relativa de lectura (directorio + nombre archivo)
-	 * @return
+	 * @return Ruta relativa de lectura.
 	 */
 	public String getFullPath() {
 		fullPath = null;

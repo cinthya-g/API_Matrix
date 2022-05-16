@@ -5,17 +5,26 @@ import org.json.*;
 import java.io.*;
 
 /**
+ * Clase general que implementa el cargado de un archivo <b>.json</b> existente.
+ * <p>
  * Guarda un archivo .json que encapsula un JSONArray bidimensional dentro
  * de un JSONObject con ayuda de la librería externa org.json.
+ *  </p>
  * @author Cinthya G, Iker J, Valeria R
- *
+ * 
  */
 public class JSonSaver extends MatrixSaver {
 
 	private JSONArray j2D;
 	private JSONObject jObj;
-
-
+	
+	/**
+	 * Construye un objeto de dicho tipo.
+	 */
+	public JSonSaver() {
+		
+	}
+	
 	public void toSave(String file, Matrix m) {
 		setFile(file);
 		BufferedWriter writer = null;

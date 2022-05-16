@@ -4,6 +4,12 @@ import m.files.*;
 import m.exceptions.*;
 import m.operators.*;
 
+/**
+ *  Clase que describe el funcionamiento de matrices a través de arreglos 
+ *  bidimensionales
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class Matrix {
 	
 	private int row;
@@ -11,9 +17,17 @@ public class Matrix {
 	private double[][] arrayM;
 	private boolean isSquare;
 	
+	/**
+	 * Construye un objeto de dicho tipo.
+	 */
 	public Matrix() {
 	}
 
+	/**
+	 * Crea una matriz  de 2 dimensiones (cuadrada) inicializada en ceros 
+	 * @param row  (Número de filas en la matriz; también corresponde al de columnas)
+	 * @throws NegativeNumberFoundException (Si la dimensión de la matriz no es positiva)
+	 */
 	public Matrix(int row) throws NegativeNumberFoundException  {
 		if(row<0)
 			throw new NegativeNumberFoundException(row);
@@ -24,6 +38,12 @@ public class Matrix {
 		
 	}
 
+	/**
+	 * Crea una matriz de 2 dimensiones inicializada en ceros
+	 * @param row (Número de filas en la matriz)
+	 * @param column (Número de columnas en la matriz)
+	 * @throws NegativeNumberFoundException (Si la dimensión de la matriz no es positiva)
+	 */
 	public Matrix(int row, int column) throws NegativeNumberFoundException {
 		if(row<=0)
 			throw new NegativeNumberFoundException(row);
@@ -37,32 +57,63 @@ public class Matrix {
 		
 	}
 
+	/**
+	 * Inserta un valor en la matriz a partir de la coordenada brindada
+	 * @param row (Posición fila)
+	 * @param column (Posición columna)
+	 * @param value (Valor a insertar)
+	 */
 	public void setValue(int row, int column,double value)   {
 		this.arrayM[row][column]= value;
 	}
 	
-
+	/**
+	 * Regresa el valor solicitado de una matriz a partir de su coordenada
+	 * @param row (Posición fila)
+	 * @param column (Posición columna)
+	 * @return Valor indicado a partir de la fila y columna
+	 */
 	public double getValue(int row, int column) {
 		return arrayM[row][column];
 	}
 
+	/**
+	 * Obtiene el número de filas contenidas en la Matriz
+	 * @return Número de filas contenidas en la Matriz
+	 */
 	public int getRow() {
 		return this.row;
 	}
 
-
+	/**
+	 * Obtiene el número de columnas contenidas en la matriz
+	 * @return Número de columnas contenidas en la matriz
+	 */
 	public int getColumn() {
 		return this.column;
 	}
 	
+	/**
+	 *  Verifica si se trata de una Matriz Cuadrada
+	 * @return <b>true</b> si se trata de una matriz cudrada 
+	 * <b>false</b> en otro caso.
+	 */
 	public boolean getIsSquare() {
 		return this.isSquare;
 	}
 	
+	/**
+	 * Obtiene la matriz bidemensional correspondiente a la matriz
+	 * @return matriz bidemensional
+	 */
 	public double[][] getArrayM(){
 		return this.arrayM;
 	}
 	
+	/**
+	 * Añade una nueva columna a la matriz
+	 * @throws NegativeNumberFoundException (Si la dimensión de la matriz no es positiva)
+	 */
 	public void addColumn() throws NegativeNumberFoundException {
 		Matrix temp = new Matrix(getRow(),getColumn()+1);
 		for(int i =0;i<getRow();i++)
@@ -78,10 +129,18 @@ public class Matrix {
 				this.isSquare=true;
 	}
 	
+	/**
+	 * Establece el número de columnas para una matriz
+	 * @param column (cantidad de columnas)
+	 */
 	private void setColumn(int column) {
 		this.column = column;
 	}
 	
+	/**
+	 * Añade una nueva fila a la matriz
+	 * @throws NegativeNumberFoundException (Si la dimensión de la matriz no es positiva)
+	 */
 	public void addRow() throws NegativeNumberFoundException {
 		
 		Matrix temp = new Matrix(getRow()+1,getColumn());
@@ -98,11 +157,18 @@ public class Matrix {
 				this.isSquare=true;
 	}
 	
-	
+	/**
+	 * Establece el número de filas para una matriz
+	 * @param row (cantidad de filas)
+	 */
 	private void setRow(int row) {
 		this.row = row;
 	}
 
+	/**
+	 * Elimina toda la columna de una matriz
+	 * @throws NegativeNumberFoundException (Si se trata de eliminar una columna con un número negativo)
+	 */
 	public void deleteColumn() throws NegativeNumberFoundException {
 		Matrix temp = new Matrix(getRow(),getColumn()-1);
 		for(int i =0;i<getRow();i++)
@@ -120,6 +186,10 @@ public class Matrix {
 				
 	}
 	
+	/**
+	 * Elimina toda la fila de una matriz 
+	 * @throws NegativeNumberFoundException (Si se trata de eliminar una columna con un número negativo)
+	 */
 	public void deleteRow() throws NegativeNumberFoundException {
 			
 		Matrix temp = new Matrix(getRow()-1,getColumn());
@@ -137,6 +207,9 @@ public class Matrix {
 				this.isSquare=true;
 	}
 	
+	/**
+	 * Inserta el valor cero (0) en cada posición de la matriz 
+	 */
 	public void addZeros()  {
 		for (int i = 0; i < getRow(); i++)
             for (int j = 0; j < getColumn(); j++) {
@@ -144,6 +217,12 @@ public class Matrix {
             }
 	}
 	
+	/**
+	 * Verifica si se trata de una Matriz Simétrica (Deebe de ser una matriz cuadrada y es 
+	 * idéntica a la matriz después de haber cambiado las filas por columnas)
+	 * @return <b>true</b> si se trata de una matriz simétrica 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean isSimmetric() {
 		if(!isSquare)
 			return false;
@@ -155,6 +234,12 @@ public class Matrix {
 		return true;
 	}
 
+	/**
+	 * Verifica si se trata de una Matriz Identidad (Debe de ser una matriz cuadrada, donde todos sus eleentos
+	 * son ceros (0) menos los elementos de la diganolas principal que son unos (1))
+	 * @return <b>true</b> si se trata de una matriz identidad 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean isIdentity() {
 		 if(!isSquare)    
 	            return false;  
@@ -169,6 +254,12 @@ public class Matrix {
 		 return true;         
 	}
 
+	/**
+	 * Verifica si se trata de una Matriz Triangular Superior (Debe de ser
+	 * una matriz cuadrada que tiene un triángulo de ceros (0) por debaho de la diagonal principal)
+	 * @return <b>true</b> si se trata de una matriz triangular superior 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean isTriangularSup() {
 		if(!isSquare) 
             return false;
@@ -182,6 +273,12 @@ public class Matrix {
 		return true;
 	}
 
+	/**
+	 * Verifica si se trata de una Matriz Triangular Inferior (Debe de ser una matriz cuadrada
+	 *  que tiene un triángulo de ceros (0) por encima de la diagonal principal)
+	 * @return <b>true</b> si se trata de una matriz triangular inferior 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean isTriangularInf() {
 		if(!isSquare) 
             return false;
@@ -195,6 +292,12 @@ public class Matrix {
 		return true;
 	}
 
+	/**
+	 * Verifica si se trata de una Matriz Nula (Debe de ser una matriz donde todos sus elemenos 
+	 * son igual a cero (0))
+	 * @return <b>true</b> si se trata de una matriz nula 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean isNull() {
 		
 		for (int i = 0; i < row; i++) 
@@ -204,6 +307,10 @@ public class Matrix {
 		return true;
 	}
 
+	/**
+	 * Sobreescritura de método que especifica el formato de impresión para una Matriz.
+	 * @return String con formato de matriz bidimensional.
+	 */
 	@Override
 	public String toString() {
 		String matrixStr = "";
@@ -216,6 +323,29 @@ public class Matrix {
 		return matrixStr;
 	}
 	
+	/**
+	 * Sobreescritura de método que clona el contenido de un objeto Matrix a otro.
+	 * @return Objeto Matrix clonado.
+	 */
+	@Override
+	public Matrix clone() {
+			Matrix clone=null;
+			try {
+				clone = new Matrix(this.getRow(),this.getColumn());
+			} catch (NegativeNumberFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			clone.arrayM=this.arrayM;
+			return clone;
+		} 
+	
+	/**
+	 * Verifica las dimensiones de dos (2) matrices
+	 * @param m (Matriz m2)
+	 * @return <b>true</b> si ambas matrices son de las mismas dimensiones 
+	 * <b>false</b> en otro caso
+	 */
 	public boolean equalsSize(Matrix m) {
 		for(int i=0; i<this.arrayM.length;i++) {
 			if(this.arrayM.length!= m.arrayM.length ||
@@ -225,6 +355,11 @@ public class Matrix {
 		return true;
 	}
 	
+	/**
+	 * Permite cargar una Matriz a partir de un formato .CSV o .JSON
+	 * @param loader (Tipo del archivo)
+	 * @param file (Nombre del archivo)
+	 */
 	public void load(MatrixLoader loader, String file) {
 		if(loader instanceof CSVLoader) {
 			CSVLoader loadedCSV = new CSVLoader();
@@ -236,6 +371,11 @@ public class Matrix {
 		}
 	}
 	
+	/***
+	 * Permite guardar una Matriz en formato .CSV o .JSON
+	 * @param saver (Tipo del archivo)
+	 * @param file (Nombre del archivo)
+	 */
 	public void save(MatrixSaver saver, String file) {
 		if(saver instanceof CSVSaver) {
 			CSVSaver savedCSV = new CSVSaver();

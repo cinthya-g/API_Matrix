@@ -6,6 +6,11 @@ import m.matrices.*;
 import m.operators.*;
 import m.vectors.*;
 
+/**
+ * Test de Matrix.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class TestMatrix {
 	
 	public static void main(String[] args) throws NegativeNumberFoundException, InsufficientComponentsException {
@@ -165,6 +170,15 @@ public class TestMatrix {
 			e.printStackTrace();
 		}
 		
+		
+		System.out.println("Cloning matrices");
+		Matrix mc =  new Matrix(5);
+		mc.setValue(4,4, 13.45);
+		System.out.println(mc);
+		
+		Matrix mcloned = mc.clone();
+		System.out.println("mcloned: ");
+		System.out.println(mcloned);
 		
 		
 

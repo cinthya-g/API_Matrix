@@ -5,11 +5,22 @@ import m.matrices.*;
 import m.vectors.*;
 
 /**
- * Guarda un archivo .csv separando los valores por comas.
+ * Clase general que implementa el guardado de un archivo <b>.csv</b> por crear.
+ * <p>
+ * Guarda un archivo .csv separando los valores por comas y convirtiendo números reales
+ * a valores de cadenas de texto (String).
+ *  </p>
  * @author Cinthya G, Iker J, Valeria R
  *
  */
 public class CSVSaver extends MatrixSaver {
+	
+	/**
+	 * Construye un objeto de dicho tipo.
+	 */
+	public CSVSaver() {
+		
+	}
 	
 	public void toSave(String file, Matrix m) {
 		
@@ -33,7 +44,11 @@ public class CSVSaver extends MatrixSaver {
 		}
 	}
 	
-	
+	/**
+	 * Método sobrecargado que guarda un archivo del formato recibido implementando un objeto Vector.
+	 * @param file Nombre del archivo (tiene que terminar en .csv).
+	 * @param v Vector en el cual se cargará (objto Vector).
+	 */
 	public void toSave(String file, Vector v) {
 		setFile(file);
 		try {

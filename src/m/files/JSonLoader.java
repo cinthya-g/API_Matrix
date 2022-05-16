@@ -4,11 +4,22 @@ import m.matrices.*;
 import java.io.*;
 
 /**
- * Carga un archivo .json al convertir su contenido de JSONObject en un String.
+ * Clase general que implementa el cargado de un archivo <b>.json</b> existente.
+ * <p>
+ * Carga un archivo .json al convertir su contenido en un arreglo
+ * de tipo String eventualmente convertido a valores de números reales.
+ *  </p>
  * @author Cinthya G, Iker J, Valeria R
  *
  */
 public class JSonLoader extends MatrixLoader {
+	
+	/**
+	 * Construye un objeto de dicho tipo.
+	 */
+	public JSonLoader() {
+		
+	}
 	
 	public void toLoad(String file, Matrix m) {
 		setFile(file);

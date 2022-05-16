@@ -3,12 +3,22 @@ package m.operators;
 import m.exceptions.*;
 import m.matrices.*;
 
+/**
+ * Resta de dos matrices de tamaño idéntico.
+ * MatrixSubstraction extiende a la clase abstracta BinaryOperation.
+ * Operación lineal, se calcula restando los elementos que ocupan la misma posición.
+ * @author Cinthya G, Iker J, Valeria R
+ *
+ */
 public class MatrixSubstraction extends BinaryOperator{
 
-	
+	/**
+	 * Construye el objeto de dicho tipo.
+	 */
 	public MatrixSubstraction() {
 		
 	}
+	
 	@Override
 	public Matrix calc(Matrix m1, Matrix m2) throws NegativeNumberFoundException, IllegalMatrixCalcException {
 		if(m1.getIsSquare()!=m2.getIsSquare())
